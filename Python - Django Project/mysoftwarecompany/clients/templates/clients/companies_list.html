@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+
+
+    <div class="flex">
+        <h1 class="text-3xl font-bold underline">
+            List of Company Clients
+        </h1>
+        <!-- Add a link to the create company page. -->
+        <div class="ml-auto mt-3">
+            <a href="{% url 'create_company' %}" class="px-4 py-2 bg-green-500 text-white rounded">
+                Create New Company
+            </a>
+        </div>
+    </div>
+
+    <!-- New section using jinja templates -->
+    <section>
+        <ul class="list-disc pl-5">
+            {% for company in companies %}
+            <li class="mb-2">
+                <strong>{{ company.name }}</strong>
+                <div class="flex">
+                    <div class="ml-auto space-x-2">
+                        <a href="{% url 'company_detail' company.id %}"
+                            class="px-3 py-1 bg-blue-500 text-white rounded">
+                            View Details
+                        </a>
+                        <a href="{% url 'update_company' company.id %}"
+                            class="px-3 py-1 bg-yellow-500 text-white rounded">
+                            Update Company
+                        </a>
+                        <a href="{% url 'company_add_employee' company.id %}"
+                            class="px-3 py-1 bg-green-500 text-white rounded">
+                            Add Employee
+                        </a>
+                        <div>
+                        </div>
+                        <div>
+                            {{company.email}}
+                        </div>
+                        <p>{{ company.description }}</p>
+
+                        <p>{{company.created_at}}</p>
+                        <hr>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}
